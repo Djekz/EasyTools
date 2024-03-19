@@ -71,10 +71,6 @@ with gr.Blocks(title="🔊",theme=gr.themes.Base(primary_hue="emerald",neutral_h
                             outputs=[audio_player],
                             fn=lambda path: {"value":path,"__type__":"update"} if os.path.exists(path) else None
                         )
-                        record_button.stop_recording(
-                            fn=lambda audio:audio, #TODO save wav lambda
-                            inputs=[record_button], 
-                            outputs=[input_audio0])
                         dropbox.upload(
                             fn=lambda audio:audio.name,
                             inputs=[dropbox], 
