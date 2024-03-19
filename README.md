@@ -1,4 +1,4 @@
-[Screenshot.png](https://github.com/RejektsAI/EasyTools)
+[![original repo](Screenshot.png)](https://github.com/RejektsAI/EasyTools)
 
 
 
