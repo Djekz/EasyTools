@@ -1,10 +1,29 @@
 from original import *
 import shutil, glob
+import yt_dlp
+import ffmpeg
 from easyfuncs import download_from_url, CachedModels
 os.makedirs("dataset",exist_ok=True)
 model_library = CachedModels()
 
-with gr.Blocks(title="🔊",theme=gr.themes.Base(primary_hue="rose",neutral_hue="zinc")) as app:
+
+def download_audio(url, audio_name):
+    ydl_opts = {
+        'format': 'bestaudio/best',
+        'postprocessors': [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'wav',
+            'preferredquality': '192',
+        }],
+        'outtmpl': f'audios/{audio_name}.wav',
+    }
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        ydl.download([url])
+    return
+
+
+
+with gr.Blocks(title="🔊",theme=gr.themes.Base(primary_hue="emerald",neutral_hue="zinc")) as app:
     with gr.Row():
         gr.HTML("<img  src='file/a.png' alt='image'>")
     with gr.Tabs():
@@ -32,6 +51,12 @@ with gr.Blocks(title="🔊",theme=gr.themes.Base(primary_hue="rose",neutral_hue=
                         dropbox = gr.File(label="Drop your audio here & hit the Reload button.")
                     with gr.Row():
                         record_button=gr.Audio(source="microphone", label="OR Record audio.", type="filepath")
+                    with gr.Row():
+                        url = gr.Textbox(label="url to yotube link.")
+                        audio_name = gr.Textbox(label="file name.")
+                        output_audio2 = gr.Audio(label="output.")
+                        dwnl_button = gr.Button("Download")
+                        dwnl_button.click(fn=download_audio,inputs=[url,audio_name],outputs=[output_audio2])
                     with gr.Row():
                         paths_for_files = lambda path:[os.path.abspath(os.path.join(path, f)) for f in os.listdir(path) if os.path.splitext(f)[1].lower() in ('.mp3', '.wav', '.flac', '.ogg')]
                         input_audio0 = gr.Dropdown(
