@@ -24,6 +24,22 @@ def download_audio(url, audio_name):
 
 
 
+def download_audio_dataset(url_yt, dataset_name):
+    ydl_opts = {
+        'format': 'bestaudio/best',
+        'postprocessors': [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'mp3',
+            'preferredquality': '192',
+        }],
+        'outtmpl': f'dataset/{dataset_name}',
+    }
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        ydl.download([url_yt])
+    return
+
+
+
 with gr.Blocks(title="🔊",theme=gr.themes.Base(primary_hue="emerald",neutral_hue="zinc")) as app:
     with gr.Row():
         gr.HTML("<img  src='file/a.png' alt='image'>")
@@ -206,6 +222,13 @@ with gr.Blocks(title="🔊",theme=gr.themes.Base(primary_hue="emerald",neutral_h
         with gr.TabItem("Train"):
             with gr.Row():
                 with gr.Column():
+                    gr.Markdown("download vocal for training"):
+                    url_yt = gr.Textbox(label="url to yotube link.")
+                    dataset_name = gr.Textbox(label="file name.")
+                    output_audio3 = gr.Textbox(label="output")
+                    train_down_button = gr.Button("Download")
+                    train_down_button.click(fn=download_audio_dataset,inputs=[url_yt,dataset_name],outputs=[output_audio3])
+                    gr.Markdown("train"):
                     training_name = gr.Textbox(label="Name your model", value="My-Voice",placeholder="My-Voice")
                     np7 = gr.Slider(
                         minimum=0,
