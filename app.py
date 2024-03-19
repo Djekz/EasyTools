@@ -49,12 +49,10 @@ with gr.Blocks(title="🔊",theme=gr.themes.Base(primary_hue="emerald",neutral_h
                 with gr.Column():
                     with gr.Row():
                         dropbox = gr.File(label="Drop your audio here & hit the Reload button.")
-                    with gr.Row():
-                        record_button=gr.Audio(source="microphone", label="OR Record audio.", type="filepath")
-                    with gr.Row():
+                        )
                         url = gr.Textbox(label="url to yotube link.")
                         audio_name = gr.Textbox(label="file name.")
-                        output_audio2 = gr.Audio(label="output.")
+                        output_audio2 = gr.Textbox(label"output")
                         dwnl_button = gr.Button("Download")
                         dwnl_button.click(fn=download_audio,inputs=[url,audio_name],outputs=[output_audio2])
                     with gr.Row():
