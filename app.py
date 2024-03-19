@@ -52,7 +52,7 @@ with gr.Blocks(title="🔊",theme=gr.themes.Base(primary_hue="emerald",neutral_h
                     with gr.Row():
                         url = gr.Textbox(label="url to yotube link.")
                         audio_name = gr.Textbox(label="file name.")
-                        output_audio2 = gr.Textbox(label"output")
+                        output_audio2 = gr.Textbox(label="output")
                     with gr.Row():
                         dwnl_button = gr.Button("Download")
                         dwnl_button.click(fn=download_audio,inputs=[url,audio_name],outputs=[output_audio2])
