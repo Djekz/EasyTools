@@ -15,7 +15,7 @@ def download_audio(url, audio_name):
             'preferredcodec': 'wav',
             'preferredquality': '192',
         }],
-        'outtmpl': f'audios/{audio_name}.wav',
+        'outtmpl': f'audios/{audio_name}',
     }
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         ydl.download([url])
