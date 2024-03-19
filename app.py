@@ -1,7 +1,7 @@
 from original import *
 import shutil, glob
 import yt_dlp
-import ffmpeg
+
 
 from easyfuncs import download_from_url, CachedModels
 os.makedirs("dataset",exist_ok=True)
