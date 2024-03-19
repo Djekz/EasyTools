@@ -13,7 +13,7 @@ def download_audio(url, audio_name):
         'format': 'bestaudio/best',
         'postprocessors': [{
             'key': 'FFmpegExtractAudio',
-            'preferredcodec': 'wav',
+            'preferredcodec': 'mp3',
             'preferredquality': '192',
         }],
         'outtmpl': f'audios/{audio_name}',
